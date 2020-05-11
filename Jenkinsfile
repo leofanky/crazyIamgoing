@@ -17,7 +17,7 @@ pipeline {
                 credentialsId: '4e9e04f8-0f41-4529-97c2-02f39c3bcb8a',
                 disableHostKeyChecking: true,
                 installation: 'asinble',
-                inventory: 'environments/production/host.ini',
+                inventory: 'environments/${params.TARGET_ENV}/host.ini',
                 playbook: 'playbook.yml'
             }
         }
