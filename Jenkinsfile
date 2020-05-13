@@ -16,7 +16,7 @@ pipeline {
 		}
 		stage('Build') { 
 			steps {
-				sh 'GOOS=linux GOARCH=amd64 go build -o myLambdaScript myLambdaScript.go'
+				sh 'GOOS=linux GOARCH=amd64 go build -o golambda golambda.go'
 				sh 'zip golambda.zip golambda'
 			}
 		}
