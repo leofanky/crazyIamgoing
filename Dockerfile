@@ -1,5 +1,6 @@
-FROM golang:alpine
+FROM golang:latest
 WORKDIR /app
-COPY multygo_master ./
+COPY main.go ./
+RUN go build main.go
 EXPOSE 9090
-CMD ["./multygo_master"]
+CMD ["./main"]
