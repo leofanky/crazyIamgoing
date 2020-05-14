@@ -15,7 +15,7 @@ pipeline {
                 --env AWS_DEFAULT_REGION=us-east-1 \
                 -v /home/vagrant/.aws:/root/.aws \
                 -v $HOME/workspace/mypipeisgettingtired:/aws \
-                -t amazon/aws-cli lambda create-function --function-name golambda --zip-file fileb://golambda.zip --handler golambda --runtime go1.x --region eu-central-1 --role arn:aws:iam::786136325720:instance-profile/lambda"
+                -t amazon/aws-cli lambda create-function --function-name golambda --zip-file fileb://golambda.zip --handler golambda --runtime go1.x --region eu-central-1 --role arn:aws:iam::786136325720:role/lambda"
 			}
 		}
 	}
