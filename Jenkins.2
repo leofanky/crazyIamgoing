@@ -9,7 +9,10 @@ pipeline {
 		}
 		stage('Create lambda with docker') {
 			steps {
-				sh "docker run -v /home/vagrant/.aws:/root/.aws -v /var/lib/jenkins/workspace/mypipeisgettingtired:/aws -t amazon/aws-cli lambda create-function --function-name golambda --zip-file fileb://golambda.zip --handler golambda --runtime go1.x --role arn:aws:iam::786136325720:role/lambda"
+				sh "docker run \
+                -v /home/vagrant/.aws:/root/.aws \
+                -v $HOME/workspace/mypipeisgettingtired:/aws \
+                -t amazon/aws-cli lambda create-function --function-name golambda --zip-file fileb://golambda.zip --handler golambda --runtime go1.x --role arn:aws:iam::786136325720:role/lambda"
 			}
 		}
 	}
