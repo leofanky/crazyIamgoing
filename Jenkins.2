@@ -9,13 +9,7 @@ pipeline {
 		}
 		stage('Create lambda with docker') {
 			steps {
-				sh "docker run \
-                --env AWS_ACCESS_KEY_ID=AKIAJF5F2NEIY6KTBRJA \
-                --env AWS_SECRET_ACCESS_KEY=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 \
-                --env AWS_DEFAULT_REGION=us-east-1 \
-                -v /home/vagrant/.aws:/root/.aws \
-                -v $HOME/workspace/mypipeisgettingtired:/aws \
-                -t amazon/aws-cli lambda create-function --function-name golambda --zip-file fileb://golambda.zip --handler golambda --runtime go1.x --region eu-central-1 --role arn:aws:iam::786136325720:role/lambda"
+				sh "docker run -v /home/vagrant/.aws:/root/.aws -v /var/lib/jenkins/workspace/mypipeisgettingtired:/aws -t amazon/aws-cli lambda create-function --function-name golambda --zip-file fileb://golambda.zip --handler golambda --runtime go1.x --role arn:aws:iam::786136325720:role/lambda"
 			}
 		}
 	}
