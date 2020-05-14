@@ -1,18 +1,21 @@
-
 pipeline {
 	agent any
 	
 	stages {
 		stage('Copy artifact') { 
 			steps {
-				copyArtifacts filter: 'golambda.zip', fingerprintArtifacts: true, projectName: 'golambda', selector: lastSuccessful()
+				copyArtifacts filter: 'golambda.zip', fingerprintArtifacts: true, projectName: 'pipemypipe', selector: lastSuccessful()
 			}
 		}
 		stage('Create lambda with docker') {
 			steps {
-				sh "docker run -v /home/vagrant/.aws:/root/.aws -v $HOME/workspace/Deploy:/aws -t amazon/aws-cli lambda create-function --function-name golambda \
---zip-file fileb://golambda.zip --handler golambda --runtime go1.x \
---role arn:aws:iam::786136325720:instance-profile/lambda"
+				sh "docker run \
+                --env AWS_ACCESS_KEY_ID=AKIAJ2A5SE4VIWPXOV7Q \
+                --env AWS_SECRET_ACCESS_KEY=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 \
+                --env AWS_DEFAULT_REGION=us-east-1 \
+                -v /home/vagrant/.aws:/root/.aws \
+                -v $HOME/workspace/mypipeisgettingtired:/aws \
+                -t amazon/aws-cli lambda create-function --function-name golambda --zip-file fileb://golambda.zip --handler golambda --runtime go1.x --region eu-central-1 --role arn:aws:iam::786136325720:instance-profile/lambda"
 			}
 		}
 	}
